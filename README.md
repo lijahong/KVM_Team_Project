@@ -7,14 +7,14 @@
 3. [기간 별 진행사항](###-3.-기간-별-진행사항)
 4. [실행 화면](###-4.-실행-화면)
 5. [DataBase 저장](###-5.-DataBase-저장)
-6. [Storage Node](###-6.-
-7.
-8.
-9.
-10.
-11.
-12.
-13.
+6. [Storage Node](###-6.-Storage-Node)
+7. [Zabbix Monitoring](###-7.-Zabbix-Monitoring)
+8. [환경 구성](###-8.-환경-구성)
+9. [Dialog 스크립트](###-9.-Dialog-스크립트---makeinstance.sh)
+10. [Instance 생성 스크립트](###-10.-Instance-생성-스크립트---makevm.sh)
+11. [이번 Project 를 통해 얻은 효과 & 소감](###-11.-이번-Project-를-통해-얻은-효과-&-소감)
+12. [Team Project 간 어려웠던 점](###-12.-Team-Project-간-어려웠던-점)
+13. [개선 희망 사항](###-13.-개선-희망-사항)
 
 ### 0. 프로젝트 목표
 
@@ -172,7 +172,7 @@ yum --enablerepo=elrepo-kernel install kernel-ml
 ![](https://velog.velcdn.com/images/lijahong/post/9854bf64-000e-436b-b119-593d76ce3451/image.png)
 - 재부팅시 kernel 이 잘 바뀐 것을 확인할 수 있다
 
-### 9. Dialog 스크립트 - makeinstance.sh
+### 9. Dialog 스크립트 - [makeinstance.sh](https://github.com/lijahong/kvm_project/blob/main/kvm_file/makeInstance.sh)
 
 > makeinstance.sh 는 Control node 에서 메뉴를 담당하는 dialog 를 구현한 스크립트이다
 
@@ -431,7 +431,7 @@ rm -rf $vmresult 2> /dev/null
 
 - 인스턴스 생성시 web 용도와 customize 용도를 선택 가능하며, web 용도를 선택시 git 주소를 입력받는다. 해당 주소는 매개 변수로 makevm.sh 에 넘겨준다
 
-### 10. Instance 생성 스크립트 - makevm.sh
+### 10. Instance 생성 스크립트 - [makevm.sh](https://github.com/lijahong/kvm_project/blob/main/kvm_file/makevm.sh)
 
 ```shell
 #!/bin/bash
