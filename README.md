@@ -192,7 +192,7 @@ yum --enablerepo=elrepo-kernel install kernel-ml
 
 ### 10. Instance 생성 스크립트 - [makevm.sh](https://github.com/lijahong/kvm_project/blob/main/kvm_file/makevm.sh)
 
-- makevm.sh 에서는 makeinstance.sh 로부터 넘겨받은 매개 변수를 이용해 Instance 를 생성한다
+> makevm.sh 에서는 makeinstance.sh 로부터 넘겨받은 매개 변수를 이용해 Instance 를 생성한다
 
 - Instance 정보와 Host 정보를 DB Node 에 설치된 MariaDB 에 저장한다
 
