@@ -94,12 +94,16 @@
 - dialog 메인 화면이다. 해당 화면에서 Instance 리스트, Network 리스트, Instance 생성과 삭제, dialog 종료를 선택할 수 있다
 
 #### Instance 생성
+
 ![](https://velog.velcdn.com/images/lijahong/post/76a73e71-6c8f-40cb-a284-7b7109ec6f79/image.png)
 - 실행시 먼저, KVM 자원을 비교하여 물리 자원에 여유가 있는 KVM Node 를 자동으로 선택해주고, 해당 Node 의 물리 자원량을 출력해준다
+
 ![](https://velog.velcdn.com/images/lijahong/post/558ae483-fcc5-4124-9bd1-786a80316f08/image.png)
 - 다음으로 Instance 용도 선택이다. web 과 customize 를 선택 가능하다
+
 ![](https://velog.velcdn.com/images/lijahong/post/1df44eec-fbb4-40d5-9ad2-ab2ade2cd299/image.png)
 - 출력할 web 페이지를 불러올 git 저장소를 입력받는다. 입력시 해당 git repository 를 clone 하여 해당 저장소 안에 있는 index.html 을 불러온다
+
 ![](https://velog.velcdn.com/images/lijahong/post/6cc61150-5e7f-4767-b2ef-ee4a8b1e1bc0/image.png)
 - web Instance 를 생성한 후 해당 주소에 접속시, web 페이지가 잘 출력된다
 
