@@ -27,8 +27,8 @@
 ### 1. 프로젝트 개요
 
 ![](https://velog.velcdn.com/images/lijahong/post/705e685f-9e7f-4566-a0f4-be2d7a9a0ab5/image.png)
-> - Bastion Host 란 침입 차단 소프트웨어가 설치되어 내부와 외부 네트워크 사이에서 일종의 게이트 역할을 수행하는 Host 이다. 외부에서 Bastion Host 에 ssh 로 접속 한다
-> - Bastion Host 는 Bridge 에 연결
+- Bastion Host 란 침입 차단 소프트웨어가 설치되어 내부와 외부 네트워크 사이에서 일종의 게이트 역할을 수행하는 Host 이다. 외부에서 Bastion Host 에 ssh 로 접속 한다
+- Bastion Host 는 Bridge 에 연결
 
 #### Team Project 설계도
 ![](https://velog.velcdn.com/images/lijahong/post/8af1eb7c-b7f8-46c8-b558-ab384228b640/image.png)
@@ -38,12 +38,13 @@
 - KVM & MariaDB & ZABBIX 를 사용한다
 
 #### Node 사양
-> - control : ram 2gb
-> - kvm : ram 4gb , Disk 20gb
-> - storage : ram 2gb , Disk 120gb
-> - db : ram 2gb
+- control : ram 2gb
+- kvm : ram 4gb , Disk 20gb
+- storage : ram 2gb , Disk 120gb
+- db : ram 2gb
 
-#### 필자가 해야 할 일
+#### 본인이 담당할 일
+
 0. control node & kvm node 환경 구성
 1. kvm 자원 비교하기
 2. control node 의 dialog 구현
@@ -57,31 +58,31 @@
 - 스크립트는 다음과 같이 두 가지 Node 에 구성된다
 
 #### Control Node
-> - 메뉴 dialog 파일을 통해 사용자에게 기능을 제공한다
-> - Instance 조회 & Network list 조회 & 삭제 & 생성 을 제공한다
-> - 생성 기능시
-> > - Resource.sh 에서 각 KVM Node 의 cpu & ram 사용량을 7:3 으로 비교하여 여유 KVM Node 를 판단하고, 매개변수로 makeinstance.sh 에 넘겨준다
-> > - 사용자로부터 입력받은 Instance 사양을 매개변수로 모아 ssh 연결을 통해 KVM NODE 의 Makevm.sh 에 매개변수로 넘겨주어 실행시킨다
-> > - web Instance 생성시 사용자로부터 git 주소를 받아와 매개 변수로 KVM Node 에 넘겨준다
+- 메뉴 dialog 파일을 통해 사용자에게 기능을 제공한다
+- Instance 조회 & Network list 조회 & 삭제 & 생성 을 제공한다
+- 생성 기능시
+> - Resource.sh 에서 각 KVM Node 의 cpu & ram 사용량을 7:3 으로 비교하여 여유 KVM Node 를 판단하고, 매개변수로 makeinstance.sh 에 넘겨준다
+> - 사용자로부터 입력받은 Instance 사양을 매개변수로 모아 ssh 연결을 통해 KVM NODE 의 Makevm.sh 에 매개변수로 넘겨주어 실행시킨다
+> - web Instance 생성시 사용자로부터 git 주소를 받아와 매개 변수로 KVM Node 에 넘겨준다
 
 #### KVM Node
-> - KVM Node 의 makevm.sh 는 인스턴스 생성 부분과 DB Node 에 Data 전달 부분으로 나뉘어진다
-> - 매개변수로 받은 Instance 사양을 통해 Instance 를 생성한다. 이때 Instance 의 외부 연결용 Network eth0 와 Overlay 용 Network eth1 은 KVM Node 에서 ifcfg-eth0, ifcfg-eth1 파일을 만들어 Instance 에 붙여넣기를 통해 설정한다
-> - virt-builder 를 사용하면, domifaddr 에서 Instance 의 Ip 를 받아오지 못하는 문제점을 해결하기 위해 Ip 는 랜덤 함수를 통해 Ip 주소 끝자리를 랜덤으로 받아와 정적 할당해준다. 이 Ip 를 ifcfg-eth 파일들에 넣어 Instance 에 설정해준다
-> - 매개 변수로 전달 받은 git 주소를 clone 하여 해당 git repository 에서 출력할 web 페이지를 불러온다
-> - 사용자가 입력한 Instance 이름을 이용해 ssh key 를 생성하여 KVM Node 에 Public key 를, Instance 에 Private Key 를 저장해준다. 이를 통해 생성한 Instance 에 ssh 연결이 가능해진다
-> - Virt-Builder 를 사용하여 Volume 에 대한 수정 작업을 진행한다. Network 설정, 패키지 설치, ssh 설정, git clone 을 통한 web 페이지 저장, 패키지 실행, 방화벽 설정 을 진행한다
-> - 수정된 Volume 을 이용하여 Instance 생성에는 Virt-Install 을 사용한다
+- KVM Node 의 makevm.sh 는 인스턴스 생성 부분과 DB Node 에 Data 전달 부분으로 나뉘어진다
+- 매개변수로 받은 Instance 사양을 통해 Instance 를 생성한다. 이때 Instance 의 외부 연결용 Network eth0 와 Overlay 용 Network eth1 은 KVM Node 에서 ifcfg-eth0, ifcfg-eth1 파일을 만들어 Instance 에 붙여넣기를 통해 설정한다
+- virt-builder 를 사용하면, domifaddr 에서 Instance 의 Ip 를 받아오지 못하는 문제점을 해결하기 위해 Ip 는 랜덤 함수를 통해 Ip 주소 끝자리를 랜덤으로 받아와 정적 할당해준다. 이 Ip 를 ifcfg-eth 파일들에 넣어 Instance 에 설정해준다
+- 매개 변수로 전달 받은 git 주소를 clone 하여 해당 git repository 에서 출력할 web 페이지를 불러온다
+- 사용자가 입력한 Instance 이름을 이용해 ssh key 를 생성하여 KVM Node 에 Public key 를, Instance 에 Private Key 를 저장해준다. 이를 통해 생성한 Instance 에 ssh 연결이 가능해진다
+- Virt-Builder 를 사용하여 Volume 에 대한 수정 작업을 진행한다. Network 설정, 패키지 설치, ssh 설정, git clone 을 통한 web 페이지 저장, 패키지 실행, 방화벽 설정 을 진행한다
+- 수정된 Volume 을 이용하여 Instance 생성에는 Virt-Install 을 사용한다
 
 #### Instance 생성시 전달하는 매개변수
-> - 작업할 KVM Node 명
-> - 사용 이미지
-> - 인스턴스 이름
-> - 인스턴스 용도
-> - git repository 주소
-> - vcpu
-> - ram
-> - disk 용량
+- 작업할 KVM Node 명
+- 사용 이미지
+- 인스턴스 이름
+- 인스턴스 용도
+- git repository 주소
+- vcpu
+- ram
+- disk 용량
 
 ### 3. 기간 별 진행사항
 
@@ -110,6 +111,7 @@
 #### Instance 삭제
 ![](https://velog.velcdn.com/images/lijahong/post/de1b6edc-0b22-428b-8bcc-07fafecd7d94/image.png)
 - 삭제 기능을 선택하면, 각 KVM 별로 Instance 리스트가 출력된다
+
 ![](https://velog.velcdn.com/images/lijahong/post/32344e18-45fa-4275-899f-b3d520720cb8/image.png)
 - Instance 선택시 삭제 여부가 출력된다. Yes 를 선택시 선택한 Instance 가 삭제된다
 > - 이때, DB 에 저장된 해당 Instance 에 대한 Data 도 삭제된다
@@ -118,6 +120,7 @@
 
 ![](https://velog.velcdn.com/images/lijahong/post/cc33d2d1-ffc2-4cdf-86fc-95946d247522/image.png)
 - host Table 에는 KVM Node 의 DATA 가 저장되어있다
+
 ![](https://velog.velcdn.com/images/lijahong/post/a9e8e8c7-7e73-45dd-8083-dfd1e4b1f0a0/image.png)
 - vm Table 에는 Instance 의 DATA 가 저장되어있다
 
@@ -125,6 +128,7 @@
 
 ![](https://velog.velcdn.com/images/lijahong/post/36bac105-aba5-4313-97f4-4980751525e1/image.png)
 - Storage 의 /cloud Directory 와 KVM 1, KVM2 각각의 /remote Directory 와 NFS 방식으로 Mount 되었다
+
 ![](https://velog.velcdn.com/images/lijahong/post/e27de3c5-d3ca-4283-9bd8-ac5aa92c6712/image.png)
 - Storage Node 와 DB Node 에는 각각 MariaDB 가 설치되어있으며, Stoargae Node 의 DB 를 Master Node , DB Node 를 백업용 Slave Node 로 두어 Fault Tolerant 를 구현하였다
 > - Fault Tolerant 란? 하드웨어나 소프트웨어의 결함, 오동작, 오류 등이 발생하더라도 규정된 기능을 지속적으로 수행할 수 있게 하는 것
@@ -132,6 +136,7 @@
 ![](https://velog.velcdn.com/images/lijahong/post/22f1445a-99d8-47eb-bc8d-93c8f529969c/image.png)
 
 ### 7. Zabbix Monitoring
+
 ![](https://velog.velcdn.com/images/lijahong/post/57b85a41-0f96-4a37-9c02-31bcadd1634d/image.png)
 - Zabbix 구현에는 https://jjeongil.tistory.com/1468 를 참조하였다
 
@@ -177,6 +182,7 @@ yum --enablerepo=elrepo-kernel install kernel-ml
 
 ![](https://velog.velcdn.com/images/lijahong/post/d924adc8-a251-4682-8133-b6b227acf4c5/image.png)
 - kernel 5 version 을 부팅시 default 로 설정해주자
+
 ![](https://velog.velcdn.com/images/lijahong/post/9854bf64-000e-436b-b119-593d76ce3451/image.png)
 - 재부팅시 kernel 이 잘 바뀐 것을 확인할 수 있다
 
