@@ -164,11 +164,11 @@ systemctl stop firewalld ; systemctl disable firewalld
 - ssh key 를 두 개 생성해서, 외부에서 control node 에 접속할 수 있게 하나, control node 에서 다른 Server 에 접속할 수 있게 하나 생성하였다
 ![](https://velog.velcdn.com/images/lijahong/post/43927dc0-e753-4ed4-8bc9-11ffa94c0ab5/image.png)
 
-- sshd_config & ssh_config 설정
-> ![](https://velog.velcdn.com/images/lijahong/post/149e47c9-2ed1-4698-8ccd-a802093e731d/image.png)
-> - ssh_config 는 위와 같이 설정한다. 이는 control node 에만 설정하자
-> ![](https://velog.velcdn.com/images/lijahong/post/cd30b1d0-cd8e-48b2-8076-77087071d6c7/image.png)
-> - sshd_config 는 5 개의 node 모두 위와 같이 Public Key 로만 인증하게 설정하자
+- ssh_config 는 위와 같이 설정한다. 이는 control node 에만 설정하자
+![](https://velog.velcdn.com/images/lijahong/post/149e47c9-2ed1-4698-8ccd-a802093e731d/image.png)
+
+- sshd_config 는 5 개의 node 모두 위와 같이 Public Key 로만 인증하게 설정하자
+![](https://velog.velcdn.com/images/lijahong/post/cd30b1d0-cd8e-48b2-8076-77087071d6c7/image.png)
 
 #### kvm node
 
